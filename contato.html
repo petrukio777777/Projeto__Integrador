@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Street90s | Contato</title>
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+ 
+    body {
+      background-color: #111;
+      color: #f5f5f5;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+ 
+    /* ===== CABEÇALHO ===== */
+    header {
+      background-color: #000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #df0101f3;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+ 
+    header h1 {
+      color: #df0101f3;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+ 
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+ 
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+ 
+    nav a:hover {
+      color: #df0101f3;
+    }
+ 
+    /* Menu Hamburguer */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+ 
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #df0101f3;
+      margin-bottom: 4px;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+ 
+    /* ===== SEÇÃO CONTATO ===== */
+    .contato {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+      padding: 60px 10%;
+    }
+ 
+    .formulario {
+      flex: 1;
+      min-width: 320px;
+      background-color: #181818;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(233, 30, 99, 0.2);
+    }
+ 
+    .formulario h2 {
+      color: #df0101f3;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+ 
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+ 
+    label {
+      font-weight: 500;
+      color: #ddd;
+    }
+ 
+    input,
+    textarea {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #222;
+      color: #fff;
+      font-size: 1rem;
+    }
+ 
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #df0101f3;
+    }
+ 
+    textarea {
+      resize: none;
+      height: 120px;
+    }
+ 
+    button {
+      background-color: #df0101f3;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+ 
+    button:hover {
+      background-color: #af0202;
+    }
+ 
+    .info-contato {
+      flex: 1;
+      min-width: 300px;
+      color: #ccc;
+    }
+ 
+    .info-contato h2 {
+      color: #df0101f3;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+ 
+    .info-contato p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+ 
+    .info-contato a {
+      color: #df0101f3;
+      text-decoration: none;
+    }
+ 
+    .info-contato a:hover {
+      text-decoration: underline;
+    }
+ 
+    .mapa {
+      margin-top: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
+    }
+ 
+    .mapa iframe {
+      width: 100%;
+      height: 350px;
+      border: none;
+    }
+ 
+    /* ===== RODAPÉ ===== */
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 25px;
+      color: #888;
+      border-top: 2px solid #df0101f3;
+      margin-top: 50px;
+    }
+ 
+    footer a {
+      color: #df0101f3;
+      text-decoration: none;
+    }
+ 
+    /* ===== RESPONSIVO ===== */
+ 
+    /* Tablets e telas menores */
+    @media (max-width: 1024px) {
+      .contato {
+        padding: 50px 5%;
+        gap: 40px;
+      }
+ 
+      .formulario,
+      .info-contato {
+        min-width: 280px;
+      }
+    }
+ 
+    /* Tablets pequenos e celulares grandes */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+ 
+      .menu-toggle {
+        display: flex;
+      }
+ 
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        gap: 30px;
+        transition: 0.5s;
+        z-index: 100;
+      }
+ 
+      nav ul.active {
+        left: 0;
+      }
+ 
+      nav a {
+        font-size: 1.2rem;
+        padding: 10px 0;
+      }
+ 
+      .contato {
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        gap: 40px;
+      }
+ 
+      .info-contato {
+        text-align: center;
+      }
+ 
+      .mapa iframe {
+        height: 300px;
+      }
+    }
+ 
+    /* Celulares */
+    @media (max-width: 480px) {
+      header {
+        padding: 12px 15px;
+      }
+ 
+      header h1 {
+        font-size: 22px;
+      }
+ 
+      .contato {
+        padding: 30px 15px;
+        gap: 30px;
+      }
+ 
+      .formulario {
+        padding: 20px;
+        min-width: 100%;
+      }
+ 
+      .info-contato {
+        min-width: 100%;
+      }
+ 
+      .info-contato h2,
+      .formulario h2 {
+        font-size: 1.5rem;
+      }
+ 
+      .mapa iframe {
+        height: 250px;
+      }
+ 
+      footer {
+        padding: 20px 15px;
+      }
+ 
+      footer p {
+        font-size: 0.9rem;
+      }
+    }
+ 
+    /* Celulares muito pequenos */
+    @media (max-width: 360px) {
+      .contato {
+        padding: 25px 10px;
+      }
+ 
+      .formulario {
+        padding: 15px;
+      }
+ 
+      .info-contato h2,
+      .formulario h2 {
+        font-size: 1.3rem;
+      }
+ 
+      input,
+      textarea,
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+ 
+<body>
+  <header>
+    <h1>𝙎𝙩𝙧𝙚𝙚𝙩90𝙨</h1>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+ 
+  <section class="contato">
+    <div class="formulario">
+      <h2>Fale Conosco</h2>
+      <form action="#" method="post">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
+ 
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required />
+ 
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Como podemos te ajudar?" required></textarea>
+ 
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+ 
+    <div class="info-contato">
+      <h2>Informações</h2>
+      <p><strong>Endereço:</strong> Rua das Manobras, 90 - Centro, Sao Jose dos Pinhais/PR</p>
+      <p><strong>Telefone:</strong> <a href="tel:+5511999999999">(41) 99999-9999</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:contato@street90s.com">contato@street90s.com</a></p>
+      <p><strong>Horário:</strong> Seg a Sáb - 10h às 20h</p>
+ 
+      <div class="mapa">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d900.0355851234624!2d-49.20511285772451!3d-25.533635130253373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcfa084f40df25%3A0x49b85127a579e68e!2sPra%C3%A7a%20do%20Verbo%20Divino!5e0!3m2!1spt-BR!2sbr!4v1762348364292!5m2!1spt-BR!2sbr%22
+          allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+ 
+  <footer>
+    <p>© 2025 𝙎𝙩𝙧𝙚𝙚𝙩90𝙨 — Entre em contato e faça parte da crew 🛹</p>
+    <p>
+      Siga a gente no <a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a>
+    </p>
+  </footer>
+ 
+  <script>
+    // Menu hamburguer para dispositivos móveis
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+ 
+    menuToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('active');
+ 
+      // Animação do ícone do menu
+      const spans = menuToggle.querySelectorAll('span');
+      if (navMenu.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+ 
+    // Fechar menu ao clicar em um link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const spans = menuToggle.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      });
+    });
+  </script>
+</body>
+ 
+</html>

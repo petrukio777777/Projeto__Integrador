@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Street90s | Produtos</title>
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+ 
+    body {
+      background-color: #111;
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+ 
+    /* ===== HEADER ===== */
+    header {
+      background-color: #000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #df0101f3;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+ 
+    header h1 {
+      color: #df0101f3;
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+ 
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+ 
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+ 
+    nav a:hover {
+      color: #df0101f3;
+    }
+ 
+    /* Menu Hamburguer */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+ 
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #df0101f3;
+      margin-bottom: 4px;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+ 
+    /* ===== FILTROS ===== */
+    .filtros {
+      padding: 20px 8%;
+      background-color: #1a1a1a;
+      border-bottom: 1px solid #333;
+    }
+ 
+    .filtros-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+ 
+    .filtro-btn {
+      background-color: #222;
+      color: #f5f5f5;
+      border: 1px solid #333;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+ 
+    .filtro-btn:hover,
+    .filtro-btn.active {
+      background-color: #df0101f3;
+      border-color: #df0101f3;
+    }
+ 
+    /* ===== MAIN CONTENT ===== */
+    main {
+      padding: 50px 8%;
+    }
+ 
+    h2 {
+      text-align: center;
+      color: #df0101f3;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      font-size: 2rem;
+    }
+ 
+    .contador-produtos {
+      text-align: center;
+      color: #888;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+ 
+    .grid-produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+ 
+    .produto {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: 0.3s;
+      border: 1px solid #222;
+    }
+ 
+    .produto:hover {
+      transform: translateY(-6px);
+      border-color: #df0101f3;
+      box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+    }
+ 
+    .produto img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+ 
+    .info-produto {
+      padding: 15px;
+      text-align: center;
+    }
+ 
+    .info-produto h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+ 
+    .preco {
+      color: #df0101f3;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+ 
+    .btn-comprar {
+      background-color: #df0101f3;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 100%;
+    }
+ 
+    .btn-comprar:hover {
+      background-color: #df0101f3;
+    }
+ 
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 25px;
+      color: #888;
+      border-top: 2px solid #df0101f3;
+      margin-top: 50px;
+    }
+ 
+    footer a {
+      color: #df0101f3;
+      text-decoration: none;
+    }
+ 
+    /* ===== RESPONSIVIDADE ===== */
+ 
+    /* Tablets e telas menores */
+    @media (max-width: 1024px) {
+      main {
+        padding: 40px 5%;
+      }
+ 
+      .filtros {
+        padding: 20px 5%;
+      }
+ 
+      .grid-produtos {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+      }
+    }
+ 
+    /* Tablets pequenos e celulares grandes */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+ 
+      .menu-toggle {
+        display: flex;
+      }
+ 
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        gap: 30px;
+        transition: 0.5s;
+        z-index: 100;
+      }
+ 
+      nav ul.active {
+        left: 0;
+      }
+ 
+      nav a {
+        font-size: 1.2rem;
+        padding: 10px 0;
+      }
+ 
+      h2 {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
+      }
+ 
+      .filtros-container {
+        gap: 10px;
+      }
+ 
+      .filtro-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+ 
+      .grid-produtos {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+ 
+    /* Celulares */
+    @media (max-width: 480px) {
+      header {
+        padding: 12px 15px;
+      }
+ 
+      header h1 {
+        font-size: 22px;
+      }
+ 
+      main {
+        padding: 30px 15px;
+      }
+ 
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+      }
+ 
+      .filtros {
+        padding: 15px;
+      }
+ 
+      .filtros-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+ 
+      .filtro-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+ 
+      .grid-produtos {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+ 
+      .produto img {
+        height: 180px;
+      }
+ 
+      .info-produto {
+        padding: 12px;
+      }
+ 
+      .info-produto h3 {
+        font-size: 1rem;
+      }
+ 
+      .preco {
+        font-size: 1.1rem;
+      }
+ 
+      .btn-comprar {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+ 
+      footer {
+        padding: 20px 15px;
+      }
+ 
+      footer p {
+        font-size: 0.9rem;
+      }
+    }
+ 
+    /* Celulares muito pequenos */
+    @media (max-width: 360px) {
+      .grid-produtos {
+        grid-template-columns: 1fr;
+      }
+ 
+      h2 {
+        font-size: 1.3rem;
+      }
+ 
+      .produto img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+ 
+<body>
+  <header>
+    <h1>𝙎𝙩𝙧𝙚𝙚𝙩90𝙨</h1>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+ 
+  <!-- Filtros de Produtos -->
+  <section class="filtros">
+    <div class="filtros-container">
+      <button class="filtro-btn active" data-categoria="todos">Todos os Produtos</button>
+      <button class="filtro-btn" data-categoria="shapes">Shapes</button>
+      <button class="filtro-btn" data-categoria="tenis">Tênis</button>
+      <button class="filtro-btn" data-categoria="trucks">Trucks</button>
+      <button class="filtro-btn" data-categoria="rodas">Rodas</button>
+      <button class="filtro-btn" data-categoria="lixas">Lixas</button>
+      <button class="filtro-btn" data-categoria="bones">Bonés</button>
+    </div>
+  </section>
+ 
+  <main>
+    <h2>Produtos Street90s</h2>
+    <div class="contador-produtos" id="contador">Mostrando todos os produtos</div>
+ 
+    <div class="grid-produtos" id="gridProdutos">
+      <!-- Shapes -->
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate cherry.jpg" alt="Shape Cherry - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Cherry</h3>
+          <p class="preco">R$ 99,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate hello kitty.jpg" alt="Shape Hello Kitty - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Hello Kitty</h3>
+          <p class="preco">R$ 109,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate preto e branco pokemon.jpg" alt="Shape Pokémon - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Pokémon</h3>
+          <p class="preco">R$ 109,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate caveira verde.jpg" alt="Shape Caveira Verde - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Caveira Verde</h3>
+          <p class="preco">R$ 99,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate spiderman.jpg" alt="Shape Spiderman - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Spiderman</h3>
+          <p class="preco">R$ 89,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="shapes">
+        <img src="imgg/shape skate caveirinha.jpg" alt="Shape Vintage Skull - Skateboard">
+        <div class="info-produto">
+          <h3>Shape Vintage Skull</h3>
+          <p class="preco">R$ 259,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <!-- Tênis -->
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/quix branco.webp" alt="Tênis Quix Branco - Skate">
+        <div class="info-produto">
+          <h3>Tênis Quix Branco</h3>
+          <p class="preco">R$ 99,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/tenis camurça preto.jpg" alt="Tênis Camurça Preto - Skate">
+        <div class="info-produto">
+          <h3>Tênis Camurça Preto</h3>
+          <p class="preco">R$ 89,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/vans skate branco com vermelho.jpg" alt="Tênis Vans Branco com Vermelho - Skate">
+        <div class="info-produto">
+          <h3>Tênis Vans Branco/Vermelho</h3>
+          <p class="preco">R$ 69,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/tenis vans gordinho.jpeg" alt="Tênis Vans - Skate">
+        <div class="info-produto">
+          <h3>Tênis Vans</h3>
+          <p class="preco">R$ 79,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/tenis vans preto e branco dec.webp" alt="Tênis Vans Preto e Branco - Skate">
+        <div class="info-produto">
+          <h3>Tênis Vans Branco/Preto</h3>
+          <p class="preco">R$ 69,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="tenis">
+        <img src="imgg/tenis vans simples.jpg" alt="Tênis Vans Simples - Skate">
+        <div class="info-produto">
+          <h3>Tênis Vans Simples</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <!-- Trucks -->
+      <div class="produto" data-categoria="trucks">
+        <img src="imgg/truck stick preto stick.webp" alt="Truck Branco Stick - Skate">
+        <div class="info-produto">
+          <h3>Truck Branco Stick</h3>
+          <p class="preco">R$ 79,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="trucks">
+        <img src="imgg/truck prata.webp" alt="Truck Prata - Skate">
+        <div class="info-produto">
+          <h3>Truck Prata</h3>
+          <p class="preco">R$ 89,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="trucks">
+        <img src="imgg/truck skate preto pgs.jpg" alt="Truck Preto PGS - Skate">
+        <div class="info-produto">
+          <h3>Truck Preto PGS</h3>
+          <p class="preco">R$ 89,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="trucks">
+        <img src="imgg/truck skate preto.jpg" alt="Truck Preto - Skate">
+        <div class="info-produto">
+          <h3>Truck Preto</h3>
+          <p class="preco">R$ 99,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="trucks">
+        <img src="imgg/truck skate branco stick.jpg" alt="Truck Preto Stick - Skate">
+        <div class="info-produto">
+          <h3>Truck Preto Stick</h3>
+          <p class="preco">R$ 100,00</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <!-- Rodas -->
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate cogumelo.jpg" alt="Roda Cogumelo - Skate">
+        <div class="info-produto">
+          <h3>Roda Cogumelo</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate colorido hallo kitty.jpg" alt="Roda Hello Kitty Colorida - Skate">
+        <div class="info-produto">
+          <h3>Roda Hello Kitty Colorida</h3>
+          <p class="preco">R$ 69,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate f1.jpg" alt="Roda F1 - Skate">
+        <div class="info-produto">
+          <h3>Roda F1</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate fogo.jpg" alt="Roda Fogo - Skate">
+        <div class="info-produto">
+          <h3>Roda Fogo</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate hello kity.jpg" alt="Roda Hello Kitty - Skate">
+        <div class="info-produto">
+          <h3>Roda Hello Kitty</h3>
+          <p class="preco">R$ 69,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="rodas">
+        <img src="imgg/roda skate ´preto e branco.jpg" alt="Roda Preto e Branco - Skate">
+        <div class="info-produto">
+          <h3>Roda Preto e Branco</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <!-- Lixas -->
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa azul.jpg" alt="Lixa Grizzy Azul - Skate">
+        <div class="info-produto">
+          <h3>Lixa Grizzy Azul</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa compton.webp" alt="Lixa Compton - Skate">
+        <div class="info-produto">
+          <h3>Lixa Compton</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa gato.jpg" alt="Lixa Gato - Skate">
+        <div class="info-produto">
+          <h3>Lixa Gato</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa rosa.webp" alt="Lixa Grizzy Rosa - Skate">
+        <div class="info-produto">
+          <h3>Lixa Grizzy Rosa</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa verde.jpg" alt="Lixa Graffiti Verde - Skate">
+        <div class="info-produto">
+          <h3>Lixa Graffiti Verde</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="lixas">
+        <img src="imgg/lixa grafite.jpg" alt="Lixa Graffiti Preta - Skate">
+        <div class="info-produto">
+          <h3>Lixa Graffiti Preta</h3>
+          <p class="preco">R$ 59,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <!-- Bonés -->
+      <div class="produto" data-categoria="bones">
+        <img src="imgg/bone high.jpg" alt="Boné High - Streetwear">
+        <div class="info-produto">
+          <h3>Boné High</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="bones">
+        <img src="imgg/bone preto 1.jpg" alt="Boné Preto - Streetwear">
+        <div class="info-produto">
+          <h3>Boné Preto</h3>
+          <p class="preco">R$ 39,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="bones">
+        <img src="imgg/bone preto e branco.jpg" alt="Boné Preto e Branco - Streetwear">
+        <div class="info-produto">
+          <h3>Boné Preto e Branco</h3>
+          <p class="preco">R$ 39,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="bones">
+        <img src="imgg/bone roxo.jpg" alt="Boné Roxo - Streetwear">
+        <div class="info-produto">
+          <h3>Boné Roxo</h3>
+          <p class="preco">R$ 45,00</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+ 
+      <div class="produto" data-categoria="bones">
+        <img src="imgg/bone trip sie.jpg" alt="Boné Trip Sie - Streetwear">
+        <div class="info-produto">
+          <h3>Boné Trip Sie</h3>
+          <p class="preco">R$ 49,90</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+ 
+  <footer>
+    <p>© 2025 𝙎𝙩𝙧𝙚𝙚𝙩90𝙨 — Estilo que não sai da linha 🛹</p>
+    <p>Siga a gente no <a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a></p>
+  </footer>
+ 
+  <script>
+    // Menu hamburguer para dispositivos móveis
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+ 
+    menuToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('active');
+ 
+      // Animação do ícone do menu
+      const spans = menuToggle.querySelectorAll('span');
+      if (navMenu.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+ 
+    // Fechar menu ao clicar em um link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const spans = menuToggle.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      });
+    });
+ 
+    // Filtros de produtos
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+    const produtos = document.querySelectorAll('.produto');
+    const contador = document.getElementById('contador');
+    const gridProdutos = document.getElementById('gridProdutos');
+ 
+    filtroBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove a classe active de todos os botões
+        filtroBtns.forEach(b => b.classList.remove('active'));
+        // Adiciona a classe active ao botão clicado
+        btn.classList.add('active');
+ 
+        const categoria = btn.getAttribute('data-categoria');
+ 
+        // Filtra os produtos
+        let produtosVisiveis = 0;
+        produtos.forEach(produto => {
+          if (categoria === 'todos' || produto.getAttribute('data-categoria') === categoria) {
+            produto.style.display = 'block';
+            produtosVisiveis++;
+          } else {
+            produto.style.display = 'none';
+          }
+        });
+ 
+        // Atualiza o contador
+        if (categoria === 'todos') {
+          contador.textContent = `Mostrando todos os ${produtosVisiveis} produtos`;
+        } else {
+          contador.textContent = `Mostrando ${produtosVisiveis} produtos na categoria ${categoria}`;
+        }
+      });
+    });
+  </script>
+</body>
+ 
+</html>
