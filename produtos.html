@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
- 
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,14 +12,14 @@
       padding: 0;
       box-sizing: border-box;
     }
- 
+
     body {
       background-color: #111;
       color: #f5f5f5;
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
     }
- 
+
     /* ===== HEADER ===== */
     header {
       background-color: #000;
@@ -32,38 +32,38 @@
       top: 0;
       z-index: 1000;
     }
- 
+
     header h1 {
       color: #df0101f3;
       font-size: 28px;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
- 
+
     nav ul {
       list-style: none;
       display: flex;
       gap: 25px;
     }
- 
+
     nav a {
       color: #f5f5f5;
       text-decoration: none;
       font-weight: 500;
       transition: 0.3s;
     }
- 
+
     nav a:hover {
       color: #df0101f3;
     }
- 
+
     /* Menu Hamburguer */
     .menu-toggle {
       display: none;
       flex-direction: column;
       cursor: pointer;
     }
- 
+
     .menu-toggle span {
       height: 3px;
       width: 25px;
@@ -72,14 +72,43 @@
       border-radius: 2px;
       transition: 0.3s;
     }
- 
+
+    /* ===== ÍCONE DO CARRINHO ===== */
+    .carrinho-icone {
+      position: relative;
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #f5f5f5;
+      transition: 0.3s;
+    }
+
+    .carrinho-icone:hover {
+      color: #df0101f3;
+    }
+
+    .carrinho-contador {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #df0101f3;
+      color: white;
+      font-size: 0.7rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     /* ===== FILTROS ===== */
     .filtros {
       padding: 20px 8%;
       background-color: #1a1a1a;
       border-bottom: 1px solid #333;
     }
- 
+
     .filtros-container {
       display: flex;
       justify-content: center;
@@ -88,7 +117,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
- 
+
     .filtro-btn {
       background-color: #222;
       color: #f5f5f5;
@@ -99,18 +128,18 @@
       transition: 0.3s;
       font-weight: 500;
     }
- 
+
     .filtro-btn:hover,
     .filtro-btn.active {
       background-color: #df0101f3;
       border-color: #df0101f3;
     }
- 
+
     /* ===== MAIN CONTENT ===== */
     main {
       padding: 50px 8%;
     }
- 
+
     h2 {
       text-align: center;
       color: #df0101f3;
@@ -118,20 +147,20 @@
       text-transform: uppercase;
       font-size: 2rem;
     }
- 
+
     .contador-produtos {
       text-align: center;
       color: #888;
       margin-bottom: 30px;
       font-size: 1rem;
     }
- 
+
     .grid-produtos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
- 
+
     .produto {
       background-color: #1a1a1a;
       border-radius: 8px;
@@ -139,36 +168,36 @@
       transition: 0.3s;
       border: 1px solid #222;
     }
- 
+
     .produto:hover {
       transform: translateY(-6px);
       border-color: #df0101f3;
       box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
     }
- 
+
     .produto img {
       width: 100%;
       height: 250px;
       object-fit: cover;
     }
- 
+
     .info-produto {
       padding: 15px;
       text-align: center;
     }
- 
+
     .info-produto h3 {
       font-size: 1.1rem;
       margin-bottom: 8px;
     }
- 
+
     .preco {
       color: #df0101f3;
       font-weight: bold;
       margin-bottom: 10px;
       font-size: 1.2rem;
     }
- 
+
     .btn-comprar {
       background-color: #df0101f3;
       color: #fff;
@@ -181,11 +210,189 @@
       text-transform: uppercase;
       width: 100%;
     }
- 
+
     .btn-comprar:hover {
       background-color: #df0101f3;
     }
- 
+
+    /* ===== MODAL DO CARRINHO ===== */
+    .modal-carrinho {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: #1a1a1a;
+      z-index: 2000;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+      overflow-y: auto;
+    }
+
+    .modal-carrinho.aberto {
+      display: block;
+    }
+
+    .carrinho-header {
+      background-color: #000;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #df0101f3;
+    }
+
+    .carrinho-header h3 {
+      color: #df0101f3;
+      font-size: 1.5rem;
+    }
+
+    .fechar-carrinho {
+      background: none;
+      border: none;
+      color: #f5f5f5;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .fechar-carrinho:hover {
+      color: #df0101f3;
+    }
+
+    .carrinho-conteudo {
+      padding: 20px;
+    }
+
+    .carrinho-vazio {
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+    }
+
+    .carrinho-vazio i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .item-carrinho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .item-info h4 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .item-info .preco-item {
+      color: #df0101f3;
+      font-weight: bold;
+    }
+
+    .item-controles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .item-controles button {
+      background-color: #333;
+      color: #f5f5f5;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .item-controles button:hover {
+      background-color: #df0101f3;
+    }
+
+    .item-quantidade {
+      min-width: 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .remover-item {
+      background-color: #333;
+      color: #f5f5f5;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .remover-item:hover {
+      background-color: #ff3333;
+    }
+
+    .carrinho-total {
+      padding: 20px;
+      background-color: #222;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .carrinho-total h4 {
+      color: #df0101f3;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .carrinho-total .valor-total {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f5f5f5;
+    }
+
+    .btn-finalizar {
+      background-color: #df0101f3;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 100%;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .btn-finalizar:hover {
+      background-color: #df0101f3;
+      transform: translateY(-2px);
+    }
+
+    /* Overlay para fechar o carrinho */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1500;
+    }
+
+    .overlay.aberto {
+      display: block;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       background-color: #000;
@@ -195,40 +402,44 @@
       border-top: 2px solid #df0101f3;
       margin-top: 50px;
     }
- 
+
     footer a {
       color: #df0101f3;
       text-decoration: none;
     }
- 
+
     /* ===== RESPONSIVIDADE ===== */
- 
+
     /* Tablets e telas menores */
     @media (max-width: 1024px) {
       main {
         padding: 40px 5%;
       }
- 
+
       .filtros {
         padding: 20px 5%;
       }
- 
+
       .grid-produtos {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 15px;
       }
+
+      .modal-carrinho {
+        max-width: 350px;
+      }
     }
- 
+
     /* Tablets pequenos e celulares grandes */
     @media (max-width: 768px) {
       header {
         padding: 15px 20px;
       }
- 
+
       .menu-toggle {
         display: flex;
       }
- 
+
       nav ul {
         position: fixed;
         top: 80px;
@@ -244,139 +455,177 @@
         transition: 0.5s;
         z-index: 100;
       }
- 
+
       nav ul.active {
         left: 0;
       }
- 
+
       nav a {
         font-size: 1.2rem;
         padding: 10px 0;
       }
- 
+
       h2 {
         font-size: 1.7rem;
         margin-bottom: 30px;
       }
- 
+
       .filtros-container {
         gap: 10px;
       }
- 
+
       .filtro-btn {
         padding: 8px 16px;
         font-size: 0.9rem;
       }
- 
+
       .grid-produtos {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       }
+
+      .modal-carrinho {
+        max-width: 300px;
+      }
     }
- 
+
     /* Celulares */
     @media (max-width: 480px) {
       header {
         padding: 12px 15px;
       }
- 
+
       header h1 {
         font-size: 22px;
       }
- 
+
       main {
         padding: 30px 15px;
       }
- 
+
       h2 {
         font-size: 1.5rem;
         margin-bottom: 25px;
       }
- 
+
       .filtros {
         padding: 15px;
       }
- 
+
       .filtros-container {
         justify-content: flex-start;
         overflow-x: auto;
         padding-bottom: 10px;
       }
- 
+
       .filtro-btn {
         white-space: nowrap;
         flex-shrink: 0;
       }
- 
+
       .grid-produtos {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 15px;
       }
- 
+
       .produto img {
         height: 180px;
       }
- 
+
       .info-produto {
         padding: 12px;
       }
- 
+
       .info-produto h3 {
         font-size: 1rem;
       }
- 
+
       .preco {
         font-size: 1.1rem;
       }
- 
+
       .btn-comprar {
         padding: 8px 12px;
         font-size: 0.9rem;
       }
- 
+
       footer {
         padding: 20px 15px;
       }
- 
+
       footer p {
         font-size: 0.9rem;
       }
+
+      .modal-carrinho {
+        max-width: 100%;
+      }
     }
- 
+
     /* Celulares muito pequenos */
     @media (max-width: 360px) {
       .grid-produtos {
         grid-template-columns: 1fr;
       }
- 
+
       h2 {
         font-size: 1.3rem;
       }
- 
+
       .produto img {
         height: 200px;
       }
     }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
- 
+
 <body>
   <header>
     <h1>𝙎𝙩𝙧𝙚𝙚𝙩90𝙨</h1>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div style="display: flex; align-items: center;">
+      <nav>
+        <ul id="navMenu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="carrinho-icone" id="carrinhoIcone">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="carrinho-contador" id="carrinhoContador">0</div>
+      </div>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-    <nav>
-      <ul id="navMenu">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="produtos.html">Produtos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="contato.html">Contato</a></li>
-      </ul>
-    </nav>
   </header>
- 
+
+  <!-- Overlay para fechar o carrinho -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Modal do Carrinho -->
+  <div class="modal-carrinho" id="modalCarrinho">
+    <div class="carrinho-header">
+      <h3>Seu Carrinho</h3>
+      <button class="fechar-carrinho" id="fecharCarrinho">&times;</button>
+    </div>
+    <div class="carrinho-conteudo" id="carrinhoConteudo">
+      <!-- Itens do carrinho serão inseridos aqui pelo JavaScript -->
+      <div class="carrinho-vazio" id="carrinhoVazio">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Seu carrinho está vazio</p>
+      </div>
+    </div>
+    <div class="carrinho-total" id="carrinhoTotal" style="display: none;">
+      <h4>Total</h4>
+      <div class="valor-total" id="valorTotal">R$ 0,00</div>
+      <button class="btn-finalizar" id="btnFinalizar">Finalizar Compra</button>
+    </div>
+  </div>
+
   <!-- Filtros de Produtos -->
   <section class="filtros">
     <div class="filtros-container">
@@ -389,11 +638,11 @@
       <button class="filtro-btn" data-categoria="bones">Bonés</button>
     </div>
   </section>
- 
+
   <main>
     <h2>Produtos Street90s</h2>
     <div class="contador-produtos" id="contador">Mostrando todos os produtos</div>
- 
+
     <div class="grid-produtos" id="gridProdutos">
       <!-- Shapes -->
       <div class="produto" data-categoria="shapes">
@@ -401,327 +650,343 @@
         <div class="info-produto">
           <h3>Shape Cherry</h3>
           <p class="preco">R$ 99,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Cherry" data-preco="99.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="shapes">
         <img src="imgg/shape skate hello kitty.jpg" alt="Shape Hello Kitty - Skateboard">
         <div class="info-produto">
           <h3>Shape Hello Kitty</h3>
           <p class="preco">R$ 109,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Hello Kitty" data-preco="109.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="shapes">
         <img src="imgg/shape skate preto e branco pokemon.jpg" alt="Shape Pokémon - Skateboard">
         <div class="info-produto">
           <h3>Shape Pokémon</h3>
           <p class="preco">R$ 109,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Pokémon" data-preco="109.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="shapes">
         <img src="imgg/shape skate caveira verde.jpg" alt="Shape Caveira Verde - Skateboard">
         <div class="info-produto">
           <h3>Shape Caveira Verde</h3>
           <p class="preco">R$ 99,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Caveira Verde" data-preco="99.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="shapes">
         <img src="imgg/shape skate spiderman.jpg" alt="Shape Spiderman - Skateboard">
         <div class="info-produto">
           <h3>Shape Spiderman</h3>
           <p class="preco">R$ 89,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Spiderman" data-preco="89.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="shapes">
         <img src="imgg/shape skate caveirinha.jpg" alt="Shape Vintage Skull - Skateboard">
         <div class="info-produto">
           <h3>Shape Vintage Skull</h3>
           <p class="preco">R$ 259,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Shape Vintage Skull" data-preco="259.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <!-- Tênis -->
       <div class="produto" data-categoria="tenis">
         <img src="imgg/quix branco.webp" alt="Tênis Quix Branco - Skate">
         <div class="info-produto">
           <h3>Tênis Quix Branco</h3>
           <p class="preco">R$ 99,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Quix Branco" data-preco="99.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="tenis">
         <img src="imgg/tenis camurça preto.jpg" alt="Tênis Camurça Preto - Skate">
         <div class="info-produto">
           <h3>Tênis Camurça Preto</h3>
           <p class="preco">R$ 89,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Camurça Preto" data-preco="89.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="tenis">
         <img src="imgg/vans skate branco com vermelho.jpg" alt="Tênis Vans Branco com Vermelho - Skate">
         <div class="info-produto">
           <h3>Tênis Vans Branco/Vermelho</h3>
           <p class="preco">R$ 69,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Vans Branco/Vermelho" data-preco="69.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="tenis">
         <img src="imgg/tenis vans gordinho.jpeg" alt="Tênis Vans - Skate">
         <div class="info-produto">
           <h3>Tênis Vans</h3>
           <p class="preco">R$ 79,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Vans" data-preco="79.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="tenis">
         <img src="imgg/tenis vans preto e branco dec.webp" alt="Tênis Vans Preto e Branco - Skate">
         <div class="info-produto">
           <h3>Tênis Vans Branco/Preto</h3>
           <p class="preco">R$ 69,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Vans Branco/Preto" data-preco="69.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="tenis">
         <img src="imgg/tenis vans simples.jpg" alt="Tênis Vans Simples - Skate">
         <div class="info-produto">
           <h3>Tênis Vans Simples</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Tênis Vans Simples" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <!-- Trucks -->
       <div class="produto" data-categoria="trucks">
         <img src="imgg/truck stick preto stick.webp" alt="Truck Branco Stick - Skate">
         <div class="info-produto">
           <h3>Truck Branco Stick</h3>
           <p class="preco">R$ 79,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Truck Branco Stick" data-preco="79.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="trucks">
         <img src="imgg/truck prata.webp" alt="Truck Prata - Skate">
         <div class="info-produto">
           <h3>Truck Prata</h3>
           <p class="preco">R$ 89,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Truck Prata" data-preco="89.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="trucks">
         <img src="imgg/truck skate preto pgs.jpg" alt="Truck Preto PGS - Skate">
         <div class="info-produto">
           <h3>Truck Preto PGS</h3>
           <p class="preco">R$ 89,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Truck Preto PGS" data-preco="89.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="trucks">
         <img src="imgg/truck skate preto.jpg" alt="Truck Preto - Skate">
         <div class="info-produto">
           <h3>Truck Preto</h3>
           <p class="preco">R$ 99,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Truck Preto" data-preco="99.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="trucks">
         <img src="imgg/truck skate branco stick.jpg" alt="Truck Preto Stick - Skate">
         <div class="info-produto">
           <h3>Truck Preto Stick</h3>
           <p class="preco">R$ 100,00</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Truck Preto Stick" data-preco="100.00">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <!-- Rodas -->
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate cogumelo.jpg" alt="Roda Cogumelo - Skate">
         <div class="info-produto">
           <h3>Roda Cogumelo</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda Cogumelo" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate colorido hallo kitty.jpg" alt="Roda Hello Kitty Colorida - Skate">
         <div class="info-produto">
           <h3>Roda Hello Kitty Colorida</h3>
           <p class="preco">R$ 69,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda Hello Kitty Colorida" data-preco="69.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate f1.jpg" alt="Roda F1 - Skate">
         <div class="info-produto">
           <h3>Roda F1</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda F1" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate fogo.jpg" alt="Roda Fogo - Skate">
         <div class="info-produto">
           <h3>Roda Fogo</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda Fogo" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate hello kity.jpg" alt="Roda Hello Kitty - Skate">
         <div class="info-produto">
           <h3>Roda Hello Kitty</h3>
           <p class="preco">R$ 69,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda Hello Kitty" data-preco="69.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="rodas">
         <img src="imgg/roda skate ´preto e branco.jpg" alt="Roda Preto e Branco - Skate">
         <div class="info-produto">
           <h3>Roda Preto e Branco</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Roda Preto e Branco" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <!-- Lixas -->
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa azul.jpg" alt="Lixa Grizzy Azul - Skate">
         <div class="info-produto">
           <h3>Lixa Grizzy Azul</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Grizzy Azul" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa compton.webp" alt="Lixa Compton - Skate">
         <div class="info-produto">
           <h3>Lixa Compton</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Compton" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa gato.jpg" alt="Lixa Gato - Skate">
         <div class="info-produto">
           <h3>Lixa Gato</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Gato" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa rosa.webp" alt="Lixa Grizzy Rosa - Skate">
         <div class="info-produto">
           <h3>Lixa Grizzy Rosa</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Grizzy Rosa" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa verde.jpg" alt="Lixa Graffiti Verde - Skate">
         <div class="info-produto">
           <h3>Lixa Graffiti Verde</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Graffiti Verde" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="lixas">
         <img src="imgg/lixa grafite.jpg" alt="Lixa Graffiti Preta - Skate">
         <div class="info-produto">
           <h3>Lixa Graffiti Preta</h3>
           <p class="preco">R$ 59,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Lixa Graffiti Preta" data-preco="59.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <!-- Bonés -->
       <div class="produto" data-categoria="bones">
         <img src="imgg/bone high.jpg" alt="Boné High - Streetwear">
         <div class="info-produto">
           <h3>Boné High</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Boné High" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="bones">
         <img src="imgg/bone preto 1.jpg" alt="Boné Preto - Streetwear">
         <div class="info-produto">
           <h3>Boné Preto</h3>
           <p class="preco">R$ 39,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Boné Preto" data-preco="39.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="bones">
         <img src="imgg/bone preto e branco.jpg" alt="Boné Preto e Branco - Streetwear">
         <div class="info-produto">
           <h3>Boné Preto e Branco</h3>
           <p class="preco">R$ 39,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Boné Preto e Branco" data-preco="39.90">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="bones">
         <img src="imgg/bone roxo.jpg" alt="Boné Roxo - Streetwear">
         <div class="info-produto">
           <h3>Boné Roxo</h3>
           <p class="preco">R$ 45,00</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Boné Roxo" data-preco="45.00">Adicionar ao Carrinho</button>
         </div>
       </div>
- 
+
       <div class="produto" data-categoria="bones">
         <img src="imgg/bone trip sie.jpg" alt="Boné Trip Sie - Streetwear">
         <div class="info-produto">
           <h3>Boné Trip Sie</h3>
           <p class="preco">R$ 49,90</p>
-          <button class="btn-comprar">Comprar</button>
+          <button class="btn-comprar" data-nome="Boné Trip Sie" data-preco="49.90">Adicionar ao Carrinho</button>
         </div>
       </div>
     </div>
   </main>
- 
+
   <footer>
     <p>© 2025 𝙎𝙩𝙧𝙚𝙚𝙩90𝙨 — Estilo que não sai da linha 🛹</p>
     <p>Siga a gente no <a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a></p>
   </footer>
- 
+
   <script>
+    // Sistema de Carrinho de Compras
+    let carrinho = JSON.parse(localStorage.getItem('carrinhoStreet90s')) || [];
+
+    // Elementos do DOM
+    const carrinhoIcone = document.getElementById('carrinhoIcone');
+    const carrinhoContador = document.getElementById('carrinhoContador');
+    const modalCarrinho = document.getElementById('modalCarrinho');
+    const overlay = document.getElementById('overlay');
+    const fecharCarrinho = document.getElementById('fecharCarrinho');
+    const carrinhoConteudo = document.getElementById('carrinhoConteudo');
+    const carrinhoVazio = document.getElementById('carrinhoVazio');
+    const carrinhoTotal = document.getElementById('carrinhoTotal');
+    const valorTotal = document.getElementById('valorTotal');
+    const btnFinalizar = document.getElementById('btnFinalizar');
+    const botoesComprar = document.querySelectorAll('.btn-comprar');
+
     // Menu hamburguer para dispositivos móveis
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
- 
+
     menuToggle.addEventListener('click', function () {
       navMenu.classList.toggle('active');
- 
+
       // Animação do ícone do menu
       const spans = menuToggle.querySelectorAll('span');
       if (navMenu.classList.contains('active')) {
@@ -734,7 +999,7 @@
         spans[2].style.transform = 'none';
       }
     });
- 
+
     // Fechar menu ao clicar em um link
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
@@ -746,22 +1011,22 @@
         spans[2].style.transform = 'none';
       });
     });
- 
+
     // Filtros de produtos
     const filtroBtns = document.querySelectorAll('.filtro-btn');
     const produtos = document.querySelectorAll('.produto');
     const contador = document.getElementById('contador');
     const gridProdutos = document.getElementById('gridProdutos');
- 
+
     filtroBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         // Remove a classe active de todos os botões
         filtroBtns.forEach(b => b.classList.remove('active'));
         // Adiciona a classe active ao botão clicado
         btn.classList.add('active');
- 
+
         const categoria = btn.getAttribute('data-categoria');
- 
+
         // Filtra os produtos
         let produtosVisiveis = 0;
         produtos.forEach(produto => {
@@ -772,7 +1037,7 @@
             produto.style.display = 'none';
           }
         });
- 
+
         // Atualiza o contador
         if (categoria === 'todos') {
           contador.textContent = `Mostrando todos os ${produtosVisiveis} produtos`;
@@ -781,7 +1046,238 @@
         }
       });
     });
+
+    // Funções do carrinho
+    function atualizarCarrinho() {
+      // Salva no localStorage
+      localStorage.setItem('carrinhoStreet90s', JSON.stringify(carrinho));
+      
+      // Atualiza contador do carrinho
+      const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+      carrinhoContador.textContent = totalItens;
+      
+      // Se não houver itens, esconde o contador
+      if (totalItens === 0) {
+        carrinhoContador.style.display = 'none';
+      } else {
+        carrinhoContador.style.display = 'flex';
+      }
+      
+      // Atualiza a exibição do carrinho se estiver aberto
+      if (modalCarrinho.classList.contains('aberto')) {
+        renderizarCarrinho();
+      }
+    }
+
+    function adicionarAoCarrinho(nome, preco) {
+      // Verifica se o produto já está no carrinho
+      const produtoExistente = carrinho.find(item => item.nome === nome);
+      
+      if (produtoExistente) {
+        // Incrementa a quantidade se já existe
+        produtoExistente.quantidade++;
+      } else {
+        // Adiciona novo produto ao carrinho
+        carrinho.push({
+          nome: nome,
+          preco: preco,
+          quantidade: 1
+        });
+      }
+      
+      atualizarCarrinho();
+      mostrarNotificacao(`${nome} adicionado ao carrinho!`);
+    }
+
+    function removerDoCarrinho(nome) {
+      // Encontra o índice do produto
+      const index = carrinho.findIndex(item => item.nome === nome);
+      
+      if (index !== -1) {
+        // Remove o produto do carrinho
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+      }
+    }
+
+    function atualizarQuantidade(nome, novaQuantidade) {
+      // Encontra o produto no carrinho
+      const produto = carrinho.find(item => item.nome === nome);
+      
+      if (produto) {
+        if (novaQuantidade <= 0) {
+          // Remove se quantidade for 0 ou negativa
+          removerDoCarrinho(nome);
+        } else {
+          // Atualiza a quantidade
+          produto.quantidade = novaQuantidade;
+          atualizarCarrinho();
+        }
+      }
+    }
+
+    function calcularTotal() {
+      return carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+    }
+
+    function renderizarCarrinho() {
+      // Limpa o conteúdo atual
+      carrinhoConteudo.innerHTML = '';
+      
+      if (carrinho.length === 0) {
+        // Mostra mensagem de carrinho vazio
+        carrinhoConteudo.appendChild(carrinhoVazio);
+        carrinhoTotal.style.display = 'none';
+        carrinhoVazio.style.display = 'block';
+      } else {
+        // Esconde mensagem de carrinho vazio
+        carrinhoVazio.style.display = 'none';
+        
+        // Renderiza cada item do carrinho
+        carrinho.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'item-carrinho';
+          
+          itemDiv.innerHTML = `
+            <div class="item-info">
+              <h4>${item.nome}</h4>
+              <p class="preco-item">R$ ${item.preco.toFixed(2)}</p>
+            </div>
+            <div class="item-controles">
+              <button class="diminuir" data-nome="${item.nome}">-</button>
+              <span class="item-quantidade">${item.quantidade}</span>
+              <button class="aumentar" data-nome="${item.nome}">+</button>
+            </div>
+            <button class="remover-item" data-nome="${item.nome}">Remover</button>
+          `;
+          
+          carrinhoConteudo.appendChild(itemDiv);
+        });
+        
+        // Atualiza total
+        valorTotal.textContent = `R$ ${calcularTotal().toFixed(2)}`;
+        carrinhoTotal.style.display = 'block';
+        
+        // Adiciona eventos aos botões dos itens
+        const botoesDiminuir = carrinhoConteudo.querySelectorAll('.diminuir');
+        const botoesAumentar = carrinhoConteudo.querySelectorAll('.aumentar');
+        const botoesRemover = carrinhoConteudo.querySelectorAll('.remover-item');
+        
+        botoesDiminuir.forEach(botao => {
+          botao.addEventListener('click', () => {
+            const nome = botao.getAttribute('data-nome');
+            const item = carrinho.find(item => item.nome === nome);
+            if (item) {
+              atualizarQuantidade(nome, item.quantidade - 1);
+            }
+          });
+        });
+        
+        botoesAumentar.forEach(botao => {
+          botao.addEventListener('click', () => {
+            const nome = botao.getAttribute('data-nome');
+            const item = carrinho.find(item => item.nome === nome);
+            if (item) {
+              atualizarQuantidade(nome, item.quantidade + 1);
+            }
+          });
+        });
+        
+        botoesRemover.forEach(botao => {
+          botao.addEventListener('click', () => {
+            const nome = botao.getAttribute('data-nome');
+            removerDoCarrinho(nome);
+          });
+        });
+      }
+    }
+
+    function mostrarNotificacao(mensagem) {
+      // Cria notificação
+      const notificacao = document.createElement('div');
+      notificacao.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #df0101f3;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        z-index: 3000;
+        font-weight: bold;
+        animation: fadeInOut 3s ease;
+      `;
+      
+      notificacao.textContent = mensagem;
+      document.body.appendChild(notificacao);
+      
+      // Remove após 3 segundos
+      setTimeout(() => {
+        notificacao.remove();
+      }, 3000);
+    }
+
+    // Event Listeners
+    carrinhoIcone.addEventListener('click', () => {
+      modalCarrinho.classList.add('aberto');
+      overlay.classList.add('aberto');
+      renderizarCarrinho();
+    });
+
+    fecharCarrinho.addEventListener('click', () => {
+      modalCarrinho.classList.remove('aberto');
+      overlay.classList.remove('aberto');
+    });
+
+    overlay.addEventListener('click', () => {
+      modalCarrinho.classList.remove('aberto');
+      overlay.classList.remove('aberto');
+    });
+
+    botoesComprar.forEach(botao => {
+      botao.addEventListener('click', () => {
+        const nome = botao.getAttribute('data-nome');
+        const preco = parseFloat(botao.getAttribute('data-preco'));
+        adicionarAoCarrinho(nome, preco);
+      });
+    });
+
+    btnFinalizar.addEventListener('click', () => {
+      if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+      }
+      
+      const total = calcularTotal();
+      const mensagem = `Compra finalizada!\nTotal: R$ ${total.toFixed(2)}\n\nItens:\n` + 
+        carrinho.map(item => `- ${item.nome} (${item.quantidade}x) R$ ${(item.preco * item.quantidade).toFixed(2)}`).join('\n');
+      
+      alert(mensagem);
+      
+      // Limpa o carrinho após finalizar
+      carrinho = [];
+      atualizarCarrinho();
+      
+      // Fecha o carrinho
+      modalCarrinho.classList.remove('aberto');
+      overlay.classList.remove('aberto');
+    });
+
+    // Inicializa o carrinho
+    atualizarCarrinho();
+
+    // Adiciona estilo CSS para animação da notificação
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(20px); }
+        10% { opacity: 1; transform: translateY(0); }
+        90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(20px); }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
- 
+
 </html>
